@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container col-md-6 mt-3">
+		<h3 class="text-success text-center">STUDENT LIST</h3>
+		<a class="btn btn-outline-success mt-2" href="{{ path('student_add') }}">ADD STUDENT</a>
+		<table class="table table-striped text-center mt-2">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Avatar</th>
+					<th>Menu</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for student in students %}
+					<tr>
+						<td>{{ student.id }}</td>
+						<td>{{ student.name }}</td>
+						<td>
+							<a href="{{ path('student_detail', {'id': student.id}) }}">
+								<img src="{{ asset('image/student/'~student.avatar )}}" alt="avatar" width="100" height="120">
+							</a>
+						</td>
+						<td>
+							<a class="btn btn-info" href="{{ path('student_edit', {'id': student.id}) }}">EDIT</a>
+							<a class="btn btn-warning" href="{{ path('student_delete', {'id': student.id}) }}" onclick="return confirm('Are you sure to delete this student ?')">DELETE</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

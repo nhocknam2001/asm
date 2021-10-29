@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container col-md-6 mt-3">
+		<h3 class="text-success text-center text-capitalize">Student DETAIL</h3>
+		<a class="btn btn-outline-success mt-2" href="{{ path('student_index') }}">Student LIST</a>
+		<table class="table table-striped text-center mt-2">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Avatar</th>
+					<th>Birthday</th>
+					<th>ADDRESS</th>
+					<th>COURSE</th>
+					<th>CATEGORY</th>
+					<th>Menu</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{ student.name }}</td>
+					<td>
+						<img src="{{ asset('image/student/'~student.avatar )}}" alt="avatar" width="100" height="120">
+					</td>
+					<td>{{ student.birthday|date('d/m/Y') }}</td>
+					<td>{{ student.address }}</td>
+					<td>
+                  {% for c in student.courses %}
+							<a href="{{ path('course_detail', {'id': c.id }) }}">
+								{{ c.name }}
+							</a>
+							<br>
+						{% endfor %}
+					</td>
+					<td>
+						{% if student.category != null %}
+							<a href="{{ path('category_detail', {'id': student.category.id }) }}">
+								{{ student.category.name }}
+							</a>
+						{% endif %}
+					</td>
+					
+					<td>
+						<a class="btn btn-info" href="{{ path('student_edit', {'id': student.id}) }}">EDIT</a>
+						<a class="btn btn-warning" href="{{ path('student_delete', {'id': student.id}) }}"
+                  onclick= "return confirm('Are you sure to delete this student ?')"
+                  >DELETE</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

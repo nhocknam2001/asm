@@ -6,14 +6,69 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            <!-- CSS only -->
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+           <!-- JavaScript Bundle with Popper -->
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container mt-3 text-center col-md-5">
+			{% for message in app.flashes('Success') %}
+				<p class="alert alert-success">{{ message }}</p>
+			{% endfor %}
+			{% for message in app.flashes('Error') %}
+				<p class="alert alert-danger">{{ message }}</p>
+			{% endfor %}
+		</div>
+		
+		{% block header %}
+			{# navigation bar #}
+		<div class="container mt-4">
+			<ul class="nav justify-content-center">
+				<li class="nav-item">
+					<h2>
+						<a class="nav-link" href="{{ path('homepage') }}">HOME</a>
+					</h2>
+				</li>
+				<li class="nav-item">
+					<h2>
+						<a class="nav-link" href="{{ path('teacher_index') }}">Teacher</a>
+					</h2>
+				</li>
+				<li class="nav-item">
+					<h2>
+						<a class="nav-link" href="{{ path('student_index') }}">Student</a>
+					</h2>
+				</li>
+				<li class="nav-item">
+					<h2>
+						<a class="nav-link" href="{{ path('course_index') }}">Course</a>
+					</h2>
+				</li>
+                <li class="nav-item">
+					<h2>
+						<a class="nav-link" href="{{ path('category_index') }}">Category</a>
+					</h2>
+				</li>
+				{# <li class="nav-item">
+					<h2>
+						<a class="nav-link" href="{{ path('app_logout') }}">LOGOUT</a>
+					</h2>
+				</li> #}
+			</ul>
+		</div>
+		{% endblock %}
+
+		{% block body %} {% endblock %}
+
+		{% block footer %}
+			<div class="container mt-3 text-center">
+				<h5 class="text-success">Copyright by Greenwich University - 2021</h5>
+			</div>
+		{% endblock %}
     </body>
 </html>

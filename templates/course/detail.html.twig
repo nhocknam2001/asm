@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container col-md-6 mt-3">
+		<h3 class="text-success text-center text-capitalize">Course Detail</h3>
+		<a class="btn btn-outline-success mt-2" href="{{ path('course_index') }}">Course LIST</a>
+		<table class="table table-striped text-center mt-2">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Grade</th>
+                    <th>Teacher</th>
+					<th>Student</th>
+					<th>Menu</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						{{ course.name }}
+					</td>
+                    <td>
+						{{course.grade}}
+						</td>
+					{% for c in course.teachers %}
+							<a href="{{ path('teacher_detail', {'id': c.id }) }}">
+								{{ c.name }}
+							</a>
+							<br>
+						{% endfor %}
+					</td>
+                    </td>
+					{% for c in course.student %}
+							<a href="{{ path('student_detail', {'id': c.id }) }}">
+								{{ c.name }}
+							</a>
+							<br>
+						{% endfor %}
+					</td>
+					
+					
+						<a class="btn btn-info" href="{{ path('course_edit', {'id': course.id}) }}">EDIT</a>
+						<a class="btn btn-warning" href="{{ path('course_delete', {'id': course.id}) }}" onclick="return confirm('Are you sure to delete this course ?')">DELETE</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
