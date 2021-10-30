@@ -8,6 +8,7 @@
 			<thead>
 				<tr>
 					<th>Name</th>
+					<th>Room</th>
 					<th>Grade</th>
                     <th>Teacher</th>
 					<th>Student</th>
@@ -19,9 +20,18 @@
 					<td>
 						{{ course.name }}
 					</td>
+					<td>
+					{% for c in course.rooms %}
+							<a href="{{ path('room_detail', {'id': c.id }) }}">
+								{{ c.name }}
+							</a>
+							<br>
+						{% endfor %}
+					</td>
                     <td>
 						{{course.grade}}
 						</td>
+                    <td>
 					{% for c in course.teachers %}
 							<a href="{{ path('teacher_detail', {'id': c.id }) }}">
 								{{ c.name }}
@@ -29,7 +39,7 @@
 							<br>
 						{% endfor %}
 					</td>
-                    </td>
+                    <td>
 					{% for c in course.student %}
 							<a href="{{ path('student_detail', {'id': c.id }) }}">
 								{{ c.name }}

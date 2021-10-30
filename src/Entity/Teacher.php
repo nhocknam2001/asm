@@ -44,6 +44,16 @@ class Teacher
      */
     private $course;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $gener;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $age;
+
     public function __construct()
     {
         $this->course = new ArrayCollection();
@@ -122,6 +132,30 @@ class Teacher
     public function removeCourse(Course $course): self
     {
         $this->course->removeElement($course);
+
+        return $this;
+    }
+
+    public function getGener(): ?string
+    {
+        return $this->gener;
+    }
+
+    public function setGener(string $gener): self
+    {
+        $this->gener = $gener;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }

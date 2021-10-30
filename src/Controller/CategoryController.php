@@ -123,7 +123,7 @@ class CategoryController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $file = $form['avatar']->getData();
+                $file = $form['image']->getData();
                 if ($file != null) {
                     $image = $category->getImage();
                     $imgName = uniqid();

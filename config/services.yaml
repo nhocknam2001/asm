@@ -6,7 +6,7 @@
 parameters:
        teacher_avatar: "%kernel.project_dir%/public/image/teacher"
        student_avatar: "%kernel.project_dir%/public/image/student"
-       category_avatar: "%kernel.project_dir%/public/image/category"
+       category_image: "%kernel.project_dir%/public/image/category"
 services:
   # default configuration for services in *this* file
   _defaults:

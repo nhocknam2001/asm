@@ -33,6 +33,9 @@ class TeacherController extends AbstractController
     public function teacherDetail($id)
     {
         $teacher = $this->getDoctrine()->getRepository(Teacher::class)->find($id);
+        $dob = $teacher->getBirthday();
+        $diff = date_diff(date_create(), $dob); 
+        $age = $diff->format('%Y');
         if ($teacher == null) {
             $this->addFlash('Error', 'Student not found !');
             return $this->redirectToRoute('teacher_index');
@@ -40,7 +43,8 @@ class TeacherController extends AbstractController
             return $this->render(
                 'teacher/detail.html.twig',
                 [
-                    'teacher' => $teacher
+                    'teacher' => $teacher,
+                    'age' => $age
                 ]
             );
         }

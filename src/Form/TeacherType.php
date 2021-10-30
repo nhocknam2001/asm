@@ -41,6 +41,15 @@ class TeacherType extends AbstractType
             ]
             
         ])
+        ->add('gener', ChoiceType::class,
+        [
+            'choices' => 
+            [
+                "Male" => "Male",
+                "Female" => "Female",
+            ]
+            
+        ])
         ->add('avatar', FileType::class,
         [
             'label' => "Teacher Avatar",

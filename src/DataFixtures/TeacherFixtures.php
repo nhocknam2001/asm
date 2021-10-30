@@ -16,6 +16,8 @@ class TeacherFixtures extends Fixture
             $teacher->setBirthday(\DateTime::createFromFormat('Y-m-d', '1999-05-08'));
             $teacher->setAddress("HaNoi");
             $teacher->setAvatar("avatar.jpg");
+            $teacher->setGener("male");
+            $teacher->setAge(rand(20, 50));
 
             $manager->persist($teacher);
         }
