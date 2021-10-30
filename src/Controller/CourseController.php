@@ -6,9 +6,13 @@ use App\Entity\Course;
 use App\Form\CourseType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class CourseController extends AbstractController
 {
   /**
@@ -28,7 +32,9 @@ class CourseController extends AbstractController
     }
 
     /**
+     * 
      * @Route("/course/detail/{id}", name="course_detail")
+     * 
      */
     public function courseDetail($id) {
         $course = $this->getDoctrine()->getRepository(Course::class)->find($id);
@@ -46,7 +52,9 @@ class CourseController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("course/delete/{id}", name="course_delete")
+     * 
      */
     public function deletecourse($id) {
         $course = $this->getDoctrine()->getRepository(Course::class)->find($id);
@@ -62,7 +70,9 @@ class CourseController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("course/add", name="course_add")
+     * 
      */
     public function addcourse (Request $request) {
         $course = new Course();
@@ -87,7 +97,9 @@ class CourseController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("course/edit/{id}", name="course_edit")
+     * 
      */
     public function editcourse(Request $request, $id) {
         $course = $this->getDoctrine()->getRepository(Course::class)->find($id);

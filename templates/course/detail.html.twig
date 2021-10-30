@@ -38,7 +38,7 @@
 						{% endfor %}
 					</td>
 					
-					
+					<td>
 						<a class="btn btn-info" href="{{ path('course_edit', {'id': course.id}) }}">EDIT</a>
 						<a class="btn btn-warning" href="{{ path('course_delete', {'id': course.id}) }}" onclick="return confirm('Are you sure to delete this course ?')">DELETE</a>
 					</td>

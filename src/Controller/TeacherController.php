@@ -7,9 +7,13 @@ use App\Form\TeacherType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class TeacherController extends AbstractController
 {
     #[Route('/teacher', name: 'teacher_index')]
@@ -24,14 +28,14 @@ class TeacherController extends AbstractController
             ]
         );
     }
-
+    
     #[Route('/teacher/detail/{id}', name: 'teacher_detail')]
     public function teacherDetail($id)
     {
         $teacher = $this->getDoctrine()->getRepository(Teacher::class)->find($id);
         if ($teacher == null) {
             $this->addFlash('Error', 'Student not found !');
-            return $this->redirectToRoute('student_index');
+            return $this->redirectToRoute('teacher_index');
         } else { //$author != null
             return $this->render(
                 'teacher/detail.html.twig',
@@ -43,7 +47,9 @@ class TeacherController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("teacher/delete/{id}", name="teacher_delete")
+     * 
      */
     public function deleteTeacher($id)
     {
@@ -60,7 +66,9 @@ class TeacherController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("teacher/add", name="teacher_add")
+     * 
      */
     public function addTeacher(Request $request)
     {
@@ -90,7 +98,7 @@ class TeacherController extends AbstractController
             $this->addFlash('Success', "Add teacher successfully !");
             return $this->redirectToRoute("teacher_index");
         }
-
+         
         return $this->render(
             "teacher/add.html.twig",
             [
@@ -100,7 +108,9 @@ class TeacherController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("teacher/edit/{id}", name="teacher_edit")
+     * 
      */
     public function editTeacher(Request $request, $id)
     {

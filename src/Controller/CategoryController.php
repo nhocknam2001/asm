@@ -7,9 +7,13 @@ use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class CategoryController extends AbstractController
 {
     #[Route('/category', name: 'category_index')]
@@ -24,7 +28,7 @@ class CategoryController extends AbstractController
             ]
         );
     }
-
+    
     #[Route('/category/detail/{id}', name: 'category_detail')]
     public function categoryDetail($id)
     {
@@ -43,7 +47,9 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("category/delete/{id}", name="category_delete")
+     * 
      */
     public function deletecategory($id)
     {
@@ -60,7 +66,9 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("category/add", name="category_add")
+     * 
      */
     public function addcategory(Request $request)
     {
@@ -100,7 +108,9 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN");
      * @Route("category/edit/{id}", name="category_edit")
+     * 
      */
     public function editcategory(Request $request, $id)
     {

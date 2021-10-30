@@ -24,8 +24,10 @@
 							</a>
 						</td>
 						<td>
+                        {% if is_granted('ROLE_ADMIN') %}
 							<a class="btn btn-info" href="{{ path('category_edit', {'id': category.id}) }}">EDIT</a>
 							<a class="btn btn-warning" href="{{ path('category_delete', {'id': category.id}) }}" onclick="return confirm('Are you sure to delete this category ?')">DELETE</a>
+                            {% endif %}
 						</td>
 					</tr>
 				{% endfor %}
